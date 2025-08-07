@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MBTI Job & Hobby Recommender</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    select {
+      padding: 10px;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+    .result h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>MBTI Job & Hobby Recommender</h1>
+  <label for="mbti">Select your MBTI type:</label>
+  <select id="mbti" onchange="showRecommendations()">
+    <option value="">-- Choose MBTI --</option>
+    <option value="INTJ">INTJ</option>
+    <option value="INFP">INFP</option>
+    <option value="ENTP">ENTP</option>
+    <option value="ESFJ">ESFJ</option>
+    <option value="ISTP">ISTP</option>
+    <option value="ENFP">ENFP</option>
+    <option value="ISTJ">ISTJ</option>
+    <option value="ISFP">ISFP</option>
+    <!-- Add more MBTI types as needed -->
+  </select>
+
+  <div id="result" class="result" style="display:none;"></div>
+
+  <script>
+    const mbtiData = {
+      INTJ: {
+        jobs: ['Strategist', 'Data Scientist', 'Software Engineer'],
+        hobbies: ['Chess', 'Writing', 'Long walks']
+      },
+      INFP: {
+        jobs: ['Counselor', 'Writer', 'Psychologist'],
+        hobbies: ['Poetry', 'Journaling', 'Volunteering']
+      },
+      ENTP: {
+        jobs: ['Entrepreneur', 'Marketer', 'Inventor'],
+        hobbies: ['Debate', 'Brainstorming', 'Traveling']
+      },
+      ESFJ: {
+        jobs: ['Teacher', 'Nurse', 'Event Planner'],
+        hobbies: ['Socializing', 'Cooking', 'Volunteering']
+      },
+      ISTP: {
+        jobs: ['Mechanic', 'Engineer', 'Pilot'],
+        hobbies: ['Fixing gadgets', 'Motorcycling', 'DIY crafts']
+      },
+      ENFP: {
+        jobs: ['Actor', 'Journalist', 'Public Speaker'],
+        hobbies: ['Singing', 'Exploring new places', 'Creative writing']
+      },
+      ISTJ: {
+        jobs: ['Accountant', 'Librarian', 'Police Officer'],
+        hobbies: ['Organizing', 'Gardening', 'Collecting']
+      },
+      ISFP: {
+        jobs: ['Artist', 'Chef', 'Landscape Designer'],
+        hobbies: ['Painting', 'Cooking', 'Photography']
+      }
+    };
+
+    function showRecommendations() {
+      const type = document.getElementById('mbti').value;
+      const resultDiv = document.getElementById('result');
+
+      if (type && mbtiData[type]) {
+        const { jobs, hobbies } = mbtiData[type];
+        resultDiv.innerHTML = `
+          <h2>${type} Recommendations</h2>
+          <strong>Jobs:</strong>
+          <ul>${jobs.map(job => `<li>${job}</li>`).join('')}</ul>
+          <strong>Hobbies:</strong>
+          <ul>${hobbies.map(hobby => `<li>${hobby}</li>`).join('')}</ul>
+        `;
+        resultDiv.style.display = 'block';
+      } else {
+        resultDiv.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
